@@ -20,6 +20,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#include "Learning/leaveoneout.h"
+
 
 typedef std::vector<std::string> stringvec;
 using namespace std::chrono;
@@ -50,21 +52,78 @@ int main(int argc, char *argv[])
     MainWindow w;
    // w.show();
     //return a.exec();
-    captation maCap;
     demarrage dem;
     //dem.start();
-    cv::Mat frame = cv::imread("../Base d_images/main_fermee/main_fermee028.jpg",3);
-   // cv::imshow("fond",fond);
-    cv::imshow("frame",frame);
 
-    high_resolution_clock::time_point time1 = high_resolution_clock::now();
-    maCap.BRGBL_critere(frame,frame);
-    high_resolution_clock::time_point time2 = high_resolution_clock::now();
-    milliseconds duration = duration_cast<milliseconds>(time2 - time1);
-    qDebug()<< " Temps d'execution : "<< (long)duration.count();
+    std::string path;
+    int nbFiles=0;
+    std::vector<double> fistsData;
+    std::vector<double> nonFistsData;
 
+    for(short i=0;i<2;i++){
 
-       cv::waitKey();
+        switch(i){
+        case 0:
+            path="../Base d_images/main_fermee/main_fermee0";
+            nbFiles=42;
+            break;
+        case 1:
+            path="../Base d_images/main_ouverte/main_ouverte0";
+            nbFiles=64;
+            break;
+        default:
+            break;
+        }
+
+        captation maCap;
+
+        for(short j=1;j<nbFiles+1;j++){
+
+            std::cout<<(i ? "Ferme" : "Ouvert") <<", "<<j<<std::endl;
+
+            std::string id;
+            if(j<10){
+                id="0"+std::to_string(j);
+            }
+            else{
+                id=std::to_string(j);
+            }
+            cv::Mat frame = cv::imread(path+id+".jpg",3);
+            //cv::imshow("Frame",frame);
+
+            try{
+                maCap.BRGBL_critere(frame,frame);
+            }  catch (...) {
+
+            }
+        }
+
+        switch(i){
+        case 0:
+            fistsData=maCap.getBRGBL();
+            break;
+        case 1:
+            nonFistsData=maCap.getBRGBL();
+            break;
+        default:
+            break;
+        }
+
+    }
+
+    std::cout<<"fistsDataLength : "<<fistsData.size()<<std::endl;
+    std::cout<<"nonFistsDataLength : "<<nonFistsData.size()<<std::endl;
+
+    LeaveOneOut2 confMat(fistsData,nonFistsData,LeaveOneOut2::Methods::m_kmeans2);
+
+    std::cout<<"Nb echantillons : "<<confMat.nbEchantillons()<<std::endl;
+    std::cout<<"TP : "<<confMat.TP_<<", FN : "<<confMat.FN_<<std::endl;
+    std::cout<<"FP : "<<confMat.FP_<<", TN : "<<confMat.TN_<<std::endl;
+    std::cout<<"Frontier : "<<confMat.getFrontier()<<std::endl;
+
+    int wait;
+    std::cin>>wait;
+    std::cout<<wait<<std::endl;
      /*   stringvec v;
         read_directory("C:/Users/seaga/Documents/Pierre/Telecom/Fise2/S8/Image/reconnaissance de forme/Projet/git/astra-pioneers/librairie/base_images/", v);
         std::copy(v.begin(), v.end(),

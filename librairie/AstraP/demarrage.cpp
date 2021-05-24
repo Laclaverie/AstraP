@@ -49,7 +49,7 @@ Pour plus tard : faire une fonction qui s'adapte à l'écran de l'utilisateur
                     cv::Scalar(0,0,255)// couleur
                     ,2
                    , cv::LINE_AA);
-        cv::imshow("Calibration",frame);
+        //cv::imshow("Calibration",frame);
 
         if (cv::waitKey(30)==13)//entrée
         {

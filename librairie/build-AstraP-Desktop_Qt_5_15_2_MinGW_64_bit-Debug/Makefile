@@ -171,6 +171,16 @@ Makefile: ../AstraP/AstraP.pro C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.c
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3d.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3d_private.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3dassetimport.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3drender.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3drender_private.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3druntimerender.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3dutils.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3dutils_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quickcontrols2.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
@@ -223,6 +233,7 @@ Makefile: ../AstraP/AstraP.pro C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.c
 		C:/Qt/5.15.2/mingw81_64/mkspecs/features/qt_config.prf \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/features/exclusive_builds.prf \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/features/toolchain.prf \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/features/default_pre.prf \
@@ -250,7 +261,6 @@ Makefile: ../AstraP/AstraP.pro C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.c
 		C:/Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl \
 		C:/Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl \
 		C:/Qt/5.15.2/mingw81_64/lib/Qt5Core.prl \
-		.qmake.stash \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf
 	$(QMAKE) -o Makefile ..\AstraP\AstraP.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/Qt/5.15.2/mingw81_64/mkspecs/features/spec_pre.prf:
@@ -354,6 +364,16 @@ C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_qmlworkerscript.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3d.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3d_private.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3dassetimport.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3dassetimport_private.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3drender.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3drender_private.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3druntimerender.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3druntimerender_private.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3dutils.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick3dutils_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quick_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quickcontrols2.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
@@ -406,6 +426,7 @@ C:/Qt/5.15.2/mingw81_64/mkspecs/features/qt_functions.prf:
 C:/Qt/5.15.2/mingw81_64/mkspecs/features/qt_config.prf:
 C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf:
 C:/Qt/5.15.2/mingw81_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 C:/Qt/5.15.2/mingw81_64/mkspecs/features/exclusive_builds.prf:
 C:/Qt/5.15.2/mingw81_64/mkspecs/features/toolchain.prf:
 C:/Qt/5.15.2/mingw81_64/mkspecs/features/default_pre.prf:
@@ -433,7 +454,6 @@ C:/Qt/5.15.2/mingw81_64/mkspecs/features/lex.prf:
 C:/Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 C:/Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl:
 C:/Qt/5.15.2/mingw81_64/lib/Qt5Core.prl:
-.qmake.stash:
 C:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\AstraP\AstraP.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"

@@ -29,8 +29,7 @@ void captation::capterTraiter(){
         // flip frame
         cv::flip(frame,frame,1);
 
-
-        cv::imshow("Sortie Camera",frame);
+        //cv::imshow("Sortie Camera",frame);
 
     }
 
@@ -41,7 +40,7 @@ cv::Mat captation::bwareaopen(cv::Mat &im, double size){
        std::vector<cv::Vec4i> hierarchy;        // chercher ce qu'est cette infamnie
        cv::findContours(im, contours,hierarchy,cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
-       for (int i = 0; i < contours.size(); i++)
+       for (unsigned int i = 0; i < contours.size(); i++)
        {
            // Calculate contour area
            double area = cv::contourArea(contours[i]);
@@ -116,7 +115,7 @@ std::vector<cv::Mat> captation::makeMaskYcbCr(cv::Mat &im,int choix,bool hsv){
 
     cv::cvtColor(clone,clone,cv::COLOR_BGR2GRAY);
     cv::Mat temps= clone.clone();
-    cv::imshow("TOOTOT nass",clone);
+    //cv::imshow("TOOTOT nass",clone);
     /* --- fill les mains + bras ---*/
 
     cv::Canny(clone,canny_output,(double)threshValue_,(double)thresholdType_);
@@ -160,14 +159,14 @@ std::vector<cv::Mat> captation::makeMaskYcbCr(cv::Mat &im,int choix,bool hsv){
     canny_output=captation::imfill(canny_output);
     cv::Mat tmp=canny_output;
 
-    cv::imshow("tmp",tmp);
+    //cv::imshow("tmp",tmp);
 
     canny_output=~canny_output;
     canny_output=captation::bwareaopen(canny_output,90000);
 
     canny_output=~canny_output;
 
-    cv::imshow("canny output",canny_output);
+    //cv::imshow("canny output",canny_output);
 
     cv::findContours(canny_output,contours,cv::RETR_EXTERNAL,cv::CHAIN_APPROX_TC89_L1);
     /// fill convex hull
@@ -179,7 +178,7 @@ std::vector<cv::Mat> captation::makeMaskYcbCr(cv::Mat &im,int choix,bool hsv){
 
 
     /// Draw convexityDefects
-   for (int i = 0; i < defects.size(); ++i)
+   for (unsigned int i = 0; i < defects.size(); ++i)
     {
         for(const cv::Vec4i& v : defects[i])
         {
@@ -198,7 +197,7 @@ std::vector<cv::Mat> captation::makeMaskYcbCr(cv::Mat &im,int choix,bool hsv){
         }
     }
 
-    cv::imshow("defects",drawing);
+    //cv::imshow("defects",drawing);
 }
 
     cv::cvtColor(main_convexe_hull_,main_convexe_hull_,cv::COLOR_BGR2GRAY);
@@ -238,15 +237,15 @@ cv::Mat captation::splitThreshMerge(cv::Mat &res,cv::Mat &im,bool hsv){ // Utili
     /* ---- Suppression du fond genant ----*/
     mask=channel[1].mul(channel[2]).mul(channel[0]);
 
-    cv::imshow("Mask original",mask);
+    //cv::imshow("Mask original",mask);
     mask=captation::bwareaopen(mask,5000);
-    cv::imshow("avant erosion", mask);
+    //cv::imshow("avant erosion", mask);
     cv::erode(mask,mask,ellipse);
     mask=captation::bwareaopen(mask,5000);
     cv::dilate(mask,mask,ellipse);
-    cv::imshow(" apres erosion",mask);
+    //cv::imshow(" apres erosion",mask);
     mask=captation::imfill(mask);
-    cv::imshow("filled",mask);
+    //cv::imshow("filled",mask);
 
     // corrections
     mask=~mask;
@@ -278,30 +277,29 @@ void captation::BRGBL_critere(cv::Mat input, cv::Mat output){
    std::vector<int> areas_convex;
    std::vector<int> areas_hull;
 
-   //remplir aires convexes
-for (int i =1;i<nLabels;i++){
-    cv::Mat maskLabel=labelImage==i;
-    qDebug() << " Aire label "<<i<<" : "<<cv::countNonZero(maskLabel);
-    areas_convex.push_back(cv::countNonZero(maskLabel));
-    //cv::imshow("Label convex "+std::to_string(i),maskLabel);
+       //remplir aires convexes
+    for (int i =1;i<nLabels;i++){
+        cv::Mat maskLabel=labelImage==i;
+        qDebug() << " Aire label "<<i<<" : "<<cv::countNonZero(maskLabel);
+        areas_convex.push_back(cv::countNonZero(maskLabel));
+        //cv::imshow("Label convex "+std::to_string(i),maskLabel);
 
-}
-// remplir les hull
-for (int i =1;i<nLabels_hull;i++){
-    cv::Mat maskLabel=labelImage_hull==i;
-    qDebug() << " Aire label Hull "<<i<<" : "<<cv::countNonZero(maskLabel);
-    areas_hull.push_back(cv::countNonZero(maskLabel));
-    //cv::imshow("Label HULL "+std::to_string(i),maskLabel);}
+    }
+    // remplir les hull
+    for (int i =1;i<nLabels_hull;i++){
+        cv::Mat maskLabel=labelImage_hull==i;
+        qDebug() << " Aire label Hull "<<i<<" : "<<cv::countNonZero(maskLabel);
+        areas_hull.push_back(cv::countNonZero(maskLabel));
+        //cv::imshow("Label HULL "+std::to_string(i),maskLabel);}
 
-}
+    }
 
-   // solidity
-int max_ITER=cv::min(nLabels,nLabels_hull);
-for (int i=0;i<max_ITER-1;i++){
-    qDebug()<< " Solidity = "<<double(areas_convex.at(i))/double(areas_hull.at(i));
-    solidity_.push_back(double(areas_convex.at(i))/double(areas_hull.at(i)));
-
-}
+       // solidity
+    int max_ITER=cv::min(nLabels,nLabels_hull);
+    for (int i=0;i<max_ITER-1;i++){
+        qDebug()<< " Solidity = "<<double(areas_convex.at(i))/double(areas_hull.at(i));
+        solidity_.push_back(double(areas_convex.at(i))/double(areas_hull.at(i)));
+    }
 
 /*
 TEST LABELS

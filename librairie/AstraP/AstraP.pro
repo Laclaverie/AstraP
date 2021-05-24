@@ -12,6 +12,8 @@ CONFIG   += console
 
 SOURCES += \
     ../Utils-master/utils.cpp \
+    Learning/kmeans.cpp \
+    Learning/leaveoneout.cpp \
     captation.cpp \
     demarrage.cpp \
     main.cpp \
@@ -19,6 +21,8 @@ SOURCES += \
 
 HEADERS += \
     ../Utils-master/utils.h \
+    Learning/kmeans.h \
+    Learning/leaveoneout.h \
     captation.h \
     demarrage.h \
     mainwindow.h

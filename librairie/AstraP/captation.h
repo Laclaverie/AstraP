@@ -30,6 +30,7 @@ public:
     void capterTraiter();
     cv::Mat splitThreshMerge(cv::Mat &res, cv::Mat &im,bool hsv);
     void BRGBL_critere(cv::Mat input,cv::Mat output); // Critère B--RGBL
+    std::vector<double> getBRGBL(){return solidity_;}
 
     /* ---- Inline fonction ----*/
     void setBackground(cv::Mat background){background_=background;}
